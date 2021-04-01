@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sensor_activities">
+        <item>Idle</item>
+        <item>Driving Bike</item>
+        <item>Walking</item>
+        <item>Climbing Stairs</item>
+        <item>Lifting Heavy Item</item>
+    </string-array>
+</resources>

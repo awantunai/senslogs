@@ -95,6 +95,14 @@ public class MainFragment extends Fragment {
         mRootView = inflater.inflate(R.layout.fragment_sensors, parent, false);
 
         fillList();
+        setUpUserActivityDropDown();
+
+        mRootView.findViewById(R.id.start_pause).setOnClickListener(v -> onPlayClick());
+
+        return mRootView;
+    }
+
+    private void setUpUserActivityDropDown() {
         Spinner spinner = mRootView.findViewById(R.id.spinner_activities);
         String[] data = getResources().getStringArray(R.array.sensor_activities);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -110,10 +118,6 @@ public class MainFragment extends Fragment {
 
             }
         });
-
-        mRootView.findViewById(R.id.start_pause).setOnClickListener(v -> onPlayClick());
-
-        return mRootView;
     }
 
 

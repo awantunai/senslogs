@@ -16,7 +16,6 @@
 		android:focusable="false"
 		android:focusableInTouchMode="false"/>
 
-
 	<ImageButton
 		android:id="@+id/settings"
 		android:layout_width="32dp"

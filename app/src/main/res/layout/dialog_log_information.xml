@@ -195,6 +195,7 @@
             android:layout_weight="1"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
+            android:visibility="gone"
             android:drawableTop="@android:drawable/ic_menu_set_as"
             android:gravity="center"
             android:text="@string/log_copy_to_sd_card" />

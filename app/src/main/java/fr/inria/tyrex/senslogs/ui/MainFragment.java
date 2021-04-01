@@ -28,6 +28,7 @@ import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -138,7 +139,15 @@ public class MainFragment extends Fragment {
         LinkedList<Group> mGroupList = new LinkedList<>();
 
         Sensor.Category lastCategory = null;
-        for (Sensor sensor : availableSensors) {
+        List<Sensor> pocOnlySensors = new ArrayList<>();
+
+        for(Sensor sensor:  availableSensors) {
+            if(sensor.getCategory().name().equals("IMU_CALIBRATED") && sensor.getType() != 2) {
+                pocOnlySensors.add(sensor);
+            }
+        }
+
+        for (Sensor sensor : pocOnlySensors) {
             if (lastCategory != sensor.getCategory()) {
                 mGroupList.add(new Group(sensor.getCategory()));
             }

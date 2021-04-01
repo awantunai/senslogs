@@ -110,8 +110,7 @@ public class SensorListAdapter extends BaseExpandableListAdapter {
 
         sensorNameTextView.setText(sensor.getName());
         sensorTypeTextView.setText(sensor.getStringType());
-        settingsImageView.setVisibility(sensor.hasSettings() ?
-                View.VISIBLE : View.GONE);
+        settingsImageView.setVisibility(View.GONE);
 
         calibrationImageView.setVisibility(mSensorsManager.getSensorsToCalibrate().contains(sensor) ?
                 View.VISIBLE : View.GONE);

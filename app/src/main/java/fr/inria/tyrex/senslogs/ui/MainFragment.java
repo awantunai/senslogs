@@ -2,7 +2,9 @@ package fr.inria.tyrex.senslogs.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,9 +26,10 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
-
+import android.widget.Spinner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,7 +82,10 @@ public class MainFragment extends Fragment {
         mPreferencesManager = ((Application) getActivity().getApplication()).getPreferences();
         mRecorder = ((Application) getActivity().getApplication()).getRecorder();
         mLogManager = ((Application) getActivity().getApplication()).getLogsManager();
-
+        getActivity().getSharedPreferences("basic_pref", Context.MODE_PRIVATE)
+                .edit()
+                .clear()
+                .apply();
 
     }
 
@@ -89,10 +95,29 @@ public class MainFragment extends Fragment {
         mRootView = inflater.inflate(R.layout.fragment_sensors, parent, false);
 
         fillList();
+        setUpUserActivityDropDown();
 
         mRootView.findViewById(R.id.start_pause).setOnClickListener(v -> onPlayClick());
 
         return mRootView;
+    }
+
+    private void setUpUserActivityDropDown() {
+        Spinner spinner = mRootView.findViewById(R.id.spinner_activities);
+        String[] data = getResources().getStringArray(R.array.sensor_activities);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                SharedPreferences sps  = getActivity().getSharedPreferences("basic_pref", Context.MODE_PRIVATE);
+                String option = data[position];
+                sps.edit().putString("activity", option).apply();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 

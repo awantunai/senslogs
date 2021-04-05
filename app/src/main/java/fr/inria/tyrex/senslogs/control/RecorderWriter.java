@@ -1,6 +1,7 @@
 package fr.inria.tyrex.senslogs.control;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Pair;
@@ -102,10 +103,17 @@ public class RecorderWriter {
         FileOutputStream fos = new FileOutputStream(file);
         mSensorsFos.put(fwo, fos);
 
+        SharedPreferences sps  = mContext.getSharedPreferences("basic_pref", Context.MODE_PRIVATE);
+        String defaultOption = resources.getStringArray(R.array.sensor_activities)[0];
+        String activity = "User activity: " + sps.getString("activity", defaultOption);
+
         /*
          * Write files headers
          */
         buffer2.append(fileName);
+        buffer2.append('\n');
+        buffer2.append('\n');
+        buffer2.append(activity);
         buffer2.append('\n');
         buffer2.append('\n');
         buffer2.append(fwo.getFieldsDescription(resources));
